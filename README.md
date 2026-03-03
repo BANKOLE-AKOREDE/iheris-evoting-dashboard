@@ -1,23 +1,36 @@
-# IHERIS E-Voting Dashboard (Vue 3)
+# IHERIS E-Voting Dashboard (Vue 3 + TypeScript)
 
-Admin dashboard for managing institutional elections.
+Administrative dashboard for managing institutional elections at IHERIS.
 
-## Features
-- Create elections (positions & candidates)
+## Current Scope (v0.1 - Admin Phase)
+
+- Election creation (positions + candidates)
 - Role-based access control
 - Live results simulator
-- Soft delete (archive) lifecycle
+- Soft delete (archive lifecycle)
 - Permanent delete (SUPER_ADMIN only)
-- Search + animated view toggle
-- Pinia state persistence
+- Active / Archived toggle with badge counters
+- Search filtering
+- State persistence via Pinia
 
-## Stack
-- Vue 3
+## Architecture
+
+- Vue 3 (Composition API)
 - TypeScript
-- Pinia
-- Vue Router
+- Pinia (modular store architecture)
+- Vue Router (role-based guards)
 - Tailwind CSS
+- Local state persistence (pinia-plugin-persistedstate)
+
+## Planned Production Upgrades
+
+- Backend integration (Node/Nest)
+- OTP-based voter authentication
+- WebSocket live result streaming
+- Immutable vote storage
+- Full audit export
+- Deployment for institutional use
 
 ---
 
-This project will later evolve into a full production-grade voting system with backend verification and real-time event streaming.
+This repository represents Phase 1 (Admin Control Layer).
