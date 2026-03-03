@@ -1,5 +1,23 @@
-# Vue 3 + TypeScript + Vite
+# IHERIS E-Voting Dashboard (Vue 3)
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Admin dashboard for managing institutional elections.
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+## Features
+- Create elections (positions & candidates)
+- Role-based access control
+- Live results simulator
+- Soft delete (archive) lifecycle
+- Permanent delete (SUPER_ADMIN only)
+- Search + animated view toggle
+- Pinia state persistence
+
+## Stack
+- Vue 3
+- TypeScript
+- Pinia
+- Vue Router
+- Tailwind CSS
+
+---
+
+This project will later evolve into a full production-grade voting system with backend verification and real-time event streaming.
