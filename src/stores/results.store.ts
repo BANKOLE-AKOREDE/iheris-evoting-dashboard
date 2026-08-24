@@ -17,34 +17,53 @@ export const useResultsStore = defineStore("results", {
     },
   },
   actions: {
-    ensureElection(electionId: string, candidateIds: string[], positionIdsByCandidate: Record<string, string>) {
-      if (this.byElectionId[electionId]) return;
+  ensureElection(
+    electionId: string,
+    candidateIds: string[],
+    positionIdsByCandidate: Record<string, string>
+  ) {
+    if (this.byElectionId[electionId]) return;
 
-      this.byElectionId[electionId] = candidateIds.map((cid) => ({
+    this.byElectionId[electionId] = candidateIds.map((cid) => {
+      const positionId = positionIdsByCandidate[cid];
+
+      if (!positionId) {
+        throw new Error(`Missing positionId for candidate: ${cid}`);
+      }
+
+      return {
         candidateId: cid,
-        positionId: positionIdsByCandidate[cid],
+        positionId,
         votes: 0,
-      }));
-    },
-    applyUpdate(electionId: string, candidateId: string, votes: number) {
-      const rows = this.byElectionId[electionId];
-      if (!rows) return;
-      const row = rows.find((r) => r.candidateId === candidateId);
-      if (!row) return;
-      row.votes = votes;
-    },
-    increment(electionId: string, candidateId: string, by = 1) {
-      const rows = this.byElectionId[electionId];
-      if (!rows) return;
-      const row = rows.find((r) => r.candidateId === candidateId);
-      if (!row) return;
-      row.votes += by;
-    },
-    resetElection(electionId: string) {
-      const rows = this.byElectionId[electionId];
-      if (!rows) return;
-      rows.forEach((r) => (r.votes = 0));
-    },
+      };
+    });
   },
-  persist: true,
+
+  applyUpdate(electionId: string, candidateId: string, votes: number) {
+    const rows = this.byElectionId[electionId];
+    if (!rows) return;
+
+    const row = rows.find((r) => r.candidateId === candidateId);
+    if (!row) return;
+
+    row.votes = votes;
+  },
+
+  increment(electionId: string, candidateId: string, by = 1) {
+    const rows = this.byElectionId[electionId];
+    if (!rows) return;
+
+    const row = rows.find((r) => r.candidateId === candidateId);
+    if (!row) return;
+
+    row.votes += by;
+  },
+
+  resetElection(electionId: string) {
+    const rows = this.byElectionId[electionId];
+    if (!rows) return;
+
+    rows.forEach((r) => (r.votes = 0));
+  },
+  },
 });
